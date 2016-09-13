@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="LunchCheck">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Lunch Check</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	</head>
+	<body ng-cloak>
+		<div class="container">
+			<div class="col-md-8 col-md-offset-2">
+			<div class="page-header">
+				<h1 class="page-title">Healthy Lunch Checker</h1>
+			</div>
+			<p class="help-block">
+			Have you struggled for years with not knowing whether or not your lunch was healthy? Well good news! Now you can simply tell this website what you eat for lunch on any given day and it will let you know whether your lunch is healthy or whether you should probably pay better attention to the things that you're eating!
+			</p>
+			<p class="help-block">
+			Simply type in the average contents of your lunch into the box below, make sure to separate each item with a comma, and click "Is It Healthy?" and we'll let you know, unequivocally whether or not your lunch is healthy. How awesome is that!?
+			</p>
+			<div ng-controller="LunchCheckController">
+				<form ng-submit="checkLunch()" novalidate>
+				<div class="form-group" ng-class="{'has-error': hasError, 'has-success': status_code == 1, 'has-warning': status_code == 2}">
+					<label class="control-label">I usually have...</label>
+					<input type="text" class="form-control" ng-model="lunchContents" placeholder="A soda, two apples, a sandwich, some Oreos&trade;" required>
+					<p class="help-block" ng-show="hasError">{{errorMessage}}</p>
+				</div>
+				<div class="alert alert-danger" ng-if="empty_items">
+				<p>
+				You can't fool us, you included {{empty_items|number:0}} blank <ng-pluralize count="empty_items" when="{0:'item','other':'items'}"></ng-pluralize> and we don't even count those! Better luck next time!
+				</p>
+				</div>
+				<button type="submit" class="btn btn-primary">Is It Healthy?</button>
+				</form>
+				<div id="lunchFeedback" ng-hide="status_code == 0" ng-cloak>
+					<h2>Your Lunch Is...</h2>
+					<div class="alert alert-success" ng-show="status_code == 1">
+					<h4>Good to Go! Enjoy!</h4>
+					<p>
+					Our expert analysis has determined that your lunch falls within the "Goldilocks Zone" of lunches in that it is the "just right" amount to fill you up and never let you down. <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="alert-link">More Information</a>
+					</p>
+					</div>
+					<div class="alert alert-warning" ng-show="status_code == 2">
+					<h4>Too Much! Danger! Danger!</h4>
+					<p>
+					Our years of experience and research lead us to believe that your lunch may contain too much food to be considered "healthy". Please consider reducing the contents of your lunch so that you don't end up like one Mr. Creosote<sup>1</sup>. 
+					</p>
+					<p>
+					<sup>1</sup> <a href="http://cdn.images.express.co.uk/img/dynamic/galleries/x701/74343.jpg" target="_blank" class="alert-link">More Information</a>
+					</p>
+					</div>
+					<div class="alert alert-info" ng-show="status_code > 2">
+					<h4>Does Not Computer</h4>
+					<p>
+					Well, this is particularly embarrassing. It would seem that something has gone wrong and now you're seeing this message because of an error in the program. Please contact <a href="mailto:no-reply@example.com" class="alert-link">no-reply@example.com</a> to let them know about this issue.
+					</p>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="angular.min.js"></script> 
+		<script src="app.js"></script> 
+	</body>
+</html>
