@@ -29,7 +29,7 @@
 				</div>
 				<div class="alert alert-danger" ng-if="empty_items">
 				<p>
-				You can't fool us, you included {{empty_items|number:0}} blank <ng-pluralize count="empty_items" when="{0:'item','other':'items'}"></ng-pluralize> and we don't even count those! Better luck next time!
+				You can't fool us, you included {{empty_items|number:0}} blank <ng-pluralize count="empty_items" when="{1:'item','other':'items'}"></ng-pluralize> and we don't even count those! Better luck next time!
 				</p>
 				</div>
 				<button type="submit" class="btn btn-primary">Is It Healthy?</button>
