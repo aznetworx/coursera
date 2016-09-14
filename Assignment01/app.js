@@ -16,6 +16,10 @@ function LunchCtrl($scope, $filter) {
 	$scope.checkLunch = function() {
 		reset();
 
+		if ($scope.lunchContents == undefined) {
+			return lunchError("You must provide at least one item that you eat for lunch.", true);
+		}
+
 		var lunch = $scope.lunchContents.trim();
 		if (lunch == '') {
 			return lunchError("You must provide at least one item that you eat for lunch.", true);
